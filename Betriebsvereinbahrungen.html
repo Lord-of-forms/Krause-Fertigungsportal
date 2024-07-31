@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Krause Betriebsvereinbarungen</title>
+    <meta name="password" content="alle"> <!-- Passwort zum Öffnen der Dokumente ist -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin: 20px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hervorhebung des Passworts */
+        .password-info {
+            color: #D32F2F; /* Unaufdringliches Rot */
+            font-weight: bold; /* Fettdruck */
+            font-size: 16px; /* Etwas größere Schrift */
+        }
+    </style>
+</head>
+<body>
+    <h1>Krause Betriebsvereinbarungen</h1>
+    <p class="password-info">Passwort zum Öffnen der Dokumente ist: alle</p>
+    <input type="text" id="searchInput" onkeyup="searchFiles()" placeholder="Suche nach Betriebsvereinbarungen...">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Größe</th>
+                <th>Änderungsdatum</th>
+            </tr>
+        </thead>
+        <tbody id="fileList">
+            <!-- Die Dateiliste wird hier dynamisch eingefügt -->
+        </tbody>
+    </table>
+
+    <script>
+        const files = [
+            { name: 'BA Flexible Arbeitszeit.pdf', size: '4770 kB', date: '22.03.1996' },
+            { name: 'BA_Gesundheitsschutz.pdf', size: '456 kB', date: '02.02.2020' },
+            { name: 'BA_Umweltschutz.pdf', size: '789 kB', date: '03.03.2020' },
+            // Weitere Dateien...
+        ];
+
+        const fileListElement = document.getElementById('fileList');
+
+        function displayFiles(filteredFiles) {
+            fileListElement.innerHTML = '';
+            filteredFiles.forEach(file => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td><a href="file:///U:/Montage/Optik/Fertigungsportal/Betriebsvereinbarungen/${file.name}" target="_blank">${file.name}</a></td>
+                                <td>${file.size}</td>
+                                <td>${file.date}</td>`;
+                fileListElement.appendChild(tr);
+            });
+        }
+
+        window.searchFiles = function() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredFiles = files.filter(file => file.name.toLowerCase().includes(searchTerm));
+            displayFiles(filteredFiles);
+        };
+
+        displayFiles(files); // Initial display
+    </script>
+</body>
+</html>
