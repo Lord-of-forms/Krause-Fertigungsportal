@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "Krause-Fertigungsportal Docs": {
+      "type": "sse",
+      "url": "https://gitmcp.io/Lord-of-forms/Krause-Fertigungsportal"
+    }
+  }
+}
